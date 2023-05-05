@@ -2,6 +2,8 @@ import Head from "next/head";
 import React, { useState } from "react";
 import styles from "@/styles/Home.module.css";
 import { Montserrat } from "next/font/google";
+import LanguageSelector from "./components/LanguageSelector";
+import Tries from "./components/Tries";
 
 const montserrat = Montserrat({ subsets: ["latin"] });
 
@@ -14,7 +16,9 @@ const IndexPage: React.FC = () => {
     setAnswer(event.target.value);
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = (e: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
+    e.preventDefault();
+    console.log(answer, tries);
     setTries(tries + 1);
     if (answer.toLowerCase() == "fire") setCorrect(true);
     if (tries == 3) setTries(0);
@@ -31,12 +35,15 @@ const IndexPage: React.FC = () => {
         />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
-      <main>
-        <section>Tries:{}</section>
-        <section className={`${styles.riddle} ${montserrat.className}`}>
+      <main className={`${montserrat.className} ${styles.main}`}>
+        <section className={styles.menu}>
+          <LanguageSelector />
+          <Tries tries={tries} />
+        </section>
+        <section className={`${styles.riddle}`}>
           <p className={styles.riddleText}>
             I am always hungry, I must always be fed. The finger I touch, will
-            soon turn red. What am I?{" "}
+            soon turn red. What am I?
           </p>
           <div className={styles.answer}>
             <input
@@ -46,7 +53,7 @@ const IndexPage: React.FC = () => {
               value={answer}
               onChange={handleAnswerChange}
             />
-            <span onClick={() => handleSubmit} className={styles.answerbtn}>
+            <span onClick={(e) => handleSubmit(e)} className={styles.answerbtn}>
               <button className={styles.btn}>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"

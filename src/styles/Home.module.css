@@ -1,3 +1,9 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .riddle {
   display: flex;
   flex-direction: column;
@@ -68,6 +74,35 @@
 .arrow {
   transition-duration: 0.3s;
   color: #efefff;
+}
+
+.menu {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.boxes {
+  display: flex;
+  justify-content: space-between;
+  column-gap: 0.8rem;
+}
+
+.box {
+  display: block;
+  width: 2rem;
+  height: 2rem;
+  border: none !important;
+  background-color: #ebedf3 !important;
+  color: red;
+  font-weight: 600;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.box svg {
+  height: 100%;
+  vertical-align: middle;
 }
 
 @media (max-width: 700px) {
